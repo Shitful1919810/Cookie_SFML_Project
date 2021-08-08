@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\Command">
+      <UniqueIdentifier>{0d3702dc-be57-4365-9310-276c2fd8dc0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Scene">
+      <UniqueIdentifier>{df7e41df-6c37-4f53-82b9-397866bfabea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\State">
+      <UniqueIdentifier>{983eef8d-f977-4ebe-bfb7-0f3da0746ea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Resource">
+      <UniqueIdentifier>{e609f125-e90d-4fc6-9ce0-7855c232f987}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\State\MyState">
+      <UniqueIdentifier>{437d5275-f342-4958-a90b-dd1fea56eb4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\GUI">
+      <UniqueIdentifier>{5df69bc3-9bd9-45ab-99e8-fc169a8094b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\GUI">
+      <UniqueIdentifier>{e2db90e3-d3be-4881-b567-767fc067820c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Scene">
+      <UniqueIdentifier>{44c2873b-997c-4e58-8ae1-8d73ccdf2573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\State">
+      <UniqueIdentifier>{8bd2ba93-0abb-4761-a5f5-bf32a0395f82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\State\MyState">
+      <UniqueIdentifier>{89d58fed-828b-4800-b4be-0bd8f8f9ec0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Component">
+      <UniqueIdentifier>{7f14462d-cddc-4d34-95e8-32e4fd62a2bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Component">
+      <UniqueIdentifier>{eb48e4ad-7e29-4266-8540-2fffb30d288e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Map">
+      <UniqueIdentifier>{c80b680f-93ac-4117-9cd3-bef1077fd100}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Map">
+      <UniqueIdentifier>{e094d90b-6a22-4f85-97b5-1c274dd3cba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Scene\Module">
+      <UniqueIdentifier>{cd690fba-2e23-4547-804d-f0a69057c5d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Scene\Module">
+      <UniqueIdentifier>{11acf91e-8728-425d-8948-ce00a1265967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Audio">
+      <UniqueIdentifier>{8d27b10e-b4ec-4c0d-bdc1-8f06a7c5e417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Audio">
+      <UniqueIdentifier>{0ff9994d-ed39-4c1b-9583-b4c218b22943}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Container.cpp">
+      <Filter>源文件\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>源文件\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>源文件\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>源文件\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteNode.cpp">
+      <Filter>源文件\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="States.cpp">
+      <Filter>源文件\State</Filter>
+    </ClCompile>
+    <ClCompile Include="StateStack.cpp">
+      <Filter>源文件\State</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>源文件\State\MyState</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>源文件\State\MyState</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseState.cpp">
+      <Filter>源文件\State\MyState</Filter>
+    </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>源文件\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>源文件\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleState.cpp">
+      <Filter>源文件\State\MyState</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsState.cpp">
+      <Filter>源文件\State\MyState</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTables.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TextNode.cpp">
+      <Filter>源文件\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>源文件\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicPlayer.cpp">
+      <Filter>源文件\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>源文件\State\MyState</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundPlayer.cpp">
+      <Filter>源文件\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundNode.cpp">
+      <Filter>源文件\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>源文件\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>源文件\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="NYN.cpp">
+      <Filter>源文件\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="HitboxModule.cpp">
+      <Filter>源文件\Scene\Module</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMover.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>头文件\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>头文件\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>头文件\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteNode.h">
+      <Filter>头文件\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="States.h">
+      <Filter>头文件\State</Filter>
+    </ClInclude>
+    <ClInclude Include="StateIdentifier.h">
+      <Filter>头文件\State</Filter>
+    </ClInclude>
+    <ClInclude Include="StateStack.h">
+      <Filter>头文件\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceIdentifiers.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>头文件\State\MyState</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleState.h">
+      <Filter>头文件\State\MyState</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>头文件\State\MyState</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>头文件\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Container.h">
+      <Filter>头文件\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Label.h">
+      <Filter>头文件\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>头文件\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsState.h">
+      <Filter>头文件\State\MyState</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTables.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TextNode.h">
+      <Filter>头文件\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicPlayer.h">
+      <Filter>头文件\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverState.h">
+      <Filter>头文件\State\MyState</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundPlayer.h">
+      <Filter>头文件\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundNode.h">
+      <Filter>头文件\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>头文件\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>头文件\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="NYN.h">
+      <Filter>头文件\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="HitboxModule.h">
+      <Filter>头文件\Scene\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h">
+      <Filter>头文件\State\MyState</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
