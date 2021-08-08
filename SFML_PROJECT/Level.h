@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/System/Vector2.hpp>
+#include <fstream>
 #include <vector>
 #include <string>
 #include <memory>
@@ -32,6 +33,8 @@ namespace Shitful
 		void drawTiles();
 		void handleTileCollision(Entity * entity, sf::Time dt);
 		void handleBoundaryCollision(Entity* entity, sf::Time dt);
+
+		void readToInt(std::ifstream& in, int& val);
 	private:
 		sf::RenderTarget& mTarget;
 		sf::View mWorldView;

@@ -1,4 +1,5 @@
-#include <fstream>
+#include <cstdio>
+#include <string>
 #include <exception>
 #include "Utilities.h"
 #include "Level.h"
@@ -23,7 +24,14 @@ void Shitful::Level::buildLevel(const std::string& file)
 	std::ifstream loadfile(file);
 	if (!loadfile.is_open())
 		throw std::runtime_error("Level file " + file + " could not be loaded.");
-	loadfile >> Layer >> maxGridSize.x >> maxGridSize.y >> mWorldBound.left >> mWorldBound.top >> mWorldBound.width >> mWorldBound.height;
+	//loadfile >> Layer >> maxGridSize.x >> maxGridSize.y >> mWorldBound.left >> mWorldBound.top >> mWorldBound.width >> mWorldBound.height;
+	readToInt(loadfile, Layer);
+	readToInt(loadfile, maxGridSize.x);
+	readToInt(loadfile, maxGridSize.y);
+	readToInt(loadfile, mWorldBound.left);
+	readToInt(loadfile, mWorldBound.top);
+	readToInt(loadfile, mWorldBound.width);
+	readToInt(loadfile, mWorldBound.height);
 	mMap.clear();
 
 	mMap.resize(Layer);
@@ -35,7 +43,8 @@ void Shitful::Level::buildLevel(const std::string& file)
 			for (int col = 0; col < maxGridSize.x; ++col)
 			{
 				int tileId;
-				loadfile >> tileId;
+				readToInt(loadfile, tileId);
+				//loadfile >> tileId;
 				if (tileId < 0 || tileId >= Tile::TypeCount)
 					throw std::runtime_error("Invalid input in " + file);
 				layer[row].emplace_back(mTextures, static_cast<Tile::Type>(tileId));
@@ -230,4 +239,29 @@ void Shitful::Level::handleBoundaryCollision(Entity* entity, sf::Time dt)
 		entity->setPosition(realWorldBound.left + realWorldBound.width - playerBounds.width / 2.f, playerBounds.top + playerBounds.height / 2.f);
 	}
 
+}
+
+void Shitful::Level::readToInt(std::ifstream& in, int& val)
+{
+	char c;
+	std::string line;
+	while (true)
+	{
+		in >> c;
+		if (in.eof())
+			throw std::runtime_error("File is corrupted.");
+		if (isspace(c))
+			continue;
+		if (c == '#')
+		{
+			std::getline(in, line);
+			continue;
+		}
+		in.unget();
+		in >> val;
+		break;
+
+
+
+	}
 }

@@ -24,7 +24,13 @@ void Shitful::Tile::setTileType(Type type)
 
 bool Shitful::Tile::isBlocking()
 {
-	return mType == Wall;
+	switch (mType)
+	{
+	case Wall:
+	case Tree:
+		return true;
+	}
+	return false;
 }
 
 void Shitful::Tile::setGridPosition(sf::Vector2i position, int gridSize)
