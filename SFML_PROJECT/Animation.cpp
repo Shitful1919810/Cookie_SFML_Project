@@ -1,6 +1,5 @@
 #include "Animation.h"
-
-
+// Comment
 Shitful::Animation::Animation()
 	: mSprite()
 	, mFrameSize()
