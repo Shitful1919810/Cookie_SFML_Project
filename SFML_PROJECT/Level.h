@@ -33,6 +33,7 @@ namespace Shitful
 		void drawTiles();
 		void handleTileCollision(Entity * entity, sf::Time dt);
 		void handleBoundaryCollision(Entity* entity, sf::Time dt);
+		void updateView();
 
 		void readToInt(std::ifstream& in, int& val);
 	private:
@@ -46,6 +47,7 @@ namespace Shitful
 		std::vector<std::vector<std::vector<Tile>>> mMap;
 		sf::Vector2i maxGridSize;
 		sf::IntRect mWorldBound;
+		sf::IntRect mViewBound;
 		int Layer;
 		SceneNode mSceneGraph;
 

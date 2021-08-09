@@ -1,6 +1,7 @@
 2		# 地图网格的层数layer
 50 50		# 地图网格的尺寸gridSize
 0 0 50 50	# 地图网格上允许玩家通过的范围(left top width height)
+0 0 50 50	# 地图网格上可以被看到的范围(left top width height)
 # 下面是 layer * gridSize.x * gridSize.y 个整数，代表了地图上每一处的类别
 # 0:Void(空白，可以通行)
 # 1:Floor(地板，可以通行)

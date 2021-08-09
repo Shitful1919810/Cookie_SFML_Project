@@ -32,6 +32,10 @@ void Shitful::Level::buildLevel(const std::string& file)
 	readToInt(loadfile, mWorldBound.top);
 	readToInt(loadfile, mWorldBound.width);
 	readToInt(loadfile, mWorldBound.height);
+	readToInt(loadfile, mViewBound.left);
+	readToInt(loadfile, mViewBound.top);
+	readToInt(loadfile, mViewBound.width);
+	readToInt(loadfile, mViewBound.height);
 	mMap.clear();
 
 	mMap.resize(Layer);
@@ -79,12 +83,11 @@ void Shitful::Level::update(sf::Time dt)
 	fixPlayerMovement(dt);
 	mSceneGraph.update(dt, mCommandQueue);
 	//printf("%f,%f\n", mPlayerEntity->getVelocity().x, mPlayerEntity->getVelocity().y);
-	mWorldView.setCenter(mPlayerEntity->getPosition());
 }
 
 void Shitful::Level::draw()
 {
-
+	updateView();
 	mTarget.setView(mWorldView);
 
 	drawTiles();
@@ -239,6 +242,23 @@ void Shitful::Level::handleBoundaryCollision(Entity* entity, sf::Time dt)
 		entity->setPosition(realWorldBound.left + realWorldBound.width - playerBounds.width / 2.f, playerBounds.top + playerBounds.height / 2.f);
 	}
 
+}
+
+void Shitful::Level::updateView()
+{
+	sf::Vector2f playerPosition = mPlayerEntity->getPosition();
+	sf::Vector2f halfViewSize = mWorldView.getSize() / 2.f;
+	sf::Vector2f viewCenter;
+	if (mViewBound.width * mGridSize <= halfViewSize.x * 2.f)
+		viewCenter.x = (2.f * mViewBound.left + mViewBound.width) / 2.f * mGridSize;
+	else
+		viewCenter.x = bound(playerPosition.x, mViewBound.left * mGridSize + halfViewSize.x, (mViewBound.left + mViewBound.width) * mGridSize - halfViewSize.x);
+	if (mViewBound.height * mGridSize <= halfViewSize.y * 2.f)
+		viewCenter.y = (2.f * mViewBound.top + mViewBound.height) / 2.f * mGridSize;
+	else
+		viewCenter.y = bound(playerPosition.y, mViewBound.top * mGridSize + halfViewSize.y, (mViewBound.top + mViewBound.height) * mGridSize - halfViewSize.y);
+
+	mWorldView.setCenter(viewCenter);
 }
 
 void Shitful::Level::readToInt(std::ifstream& in, int& val)
