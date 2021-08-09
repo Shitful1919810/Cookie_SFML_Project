@@ -84,22 +84,24 @@ void Shitful::Cookie::applyAcceleration(sf::Time dt)
 	if (mAcceleration.x != 0 && mAcceleration.y != 0)
 		factor = sqrt2;										// 对角线正规化
 	velocity += mAcceleration * dt.asSeconds() / factor;
-	if (velocity.x > 0.f) //Check for positive x
+
+	// 模拟摩擦力
+	if (velocity.x > 0.f)
 	{
 		velocity.x -= mDeacceleration * dt.asSeconds() / factor;
 		velocity.x = std::max(0.f, velocity.x);
 	}
-	else if (velocity.x < 0.f) //Check for negative x
+	else if (velocity.x < 0.f)
 	{
 		velocity.x += mDeacceleration * dt.asSeconds() / factor;
 		velocity.x = std::min(0.f, velocity.x);
 	}
-	if (velocity.y > 0.f) //Check for positive y
+	if (velocity.y > 0.f)
 	{
 		velocity.y -= mDeacceleration * dt.asSeconds() / factor;
 		velocity.y = std::max(0.f, velocity.y);
 	}
-	else if (velocity.y < 0.f) //Check for negative y
+	else if (velocity.y < 0.f)
 	{
 		velocity.y += mDeacceleration * dt.asSeconds() / factor;
 		velocity.y = std::min(0.f, velocity.y);
@@ -117,6 +119,8 @@ void Shitful::Cookie::updateCurrent(sf::Time dt, CommandQueue& commands)
 		return;
 	}
 	sf::Vector2f velocity = getVelocity();
+
+	// 确保速率不超过规定限度
 	if (velocity > getMaxSpeed())
 		setVelocity(unitVector(velocity) * getMaxSpeed());
 	Entity::updateCurrent(dt, commands);
@@ -127,5 +131,7 @@ void Shitful::Cookie::updateCurrent(sf::Time dt, CommandQueue& commands)
 void Shitful::Cookie::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(mSprite, states);
+#ifndef NDEBUG
 	mHitbox->drawCurrent(target, states);
+#endif // NDEBUG
 }

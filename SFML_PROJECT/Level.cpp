@@ -164,7 +164,7 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 					layer[y][x].intersects(nextPositionBounds)
 					)
 				{
-					//Bottom collision
+					// 障碍物在下方
 					if (playerBounds.top < wallBounds.top
 						&& playerBounds.top + playerBounds.height < wallBounds.top + wallBounds.height
 						&& playerBounds.left < wallBounds.left + wallBounds.width
@@ -175,7 +175,7 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 						entity->setPosition(playerBounds.left + playerBounds.width / 2.f, wallBounds.top - playerBounds.height / 2.f);
 					}
 
-					//Top collision
+					// 障碍物在上方
 					else if (playerBounds.top > wallBounds.top
 						&& playerBounds.top + playerBounds.height > wallBounds.top + wallBounds.height
 						&& playerBounds.left < wallBounds.left + wallBounds.width
@@ -186,7 +186,7 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 						entity->setPosition(playerBounds.left + playerBounds.width / 2.f, wallBounds.top + wallBounds.height + playerBounds.height / 2.f);
 					}
 
-					//Right collision
+					// 障碍物在右侧
 					if (playerBounds.left < wallBounds.left
 						&& playerBounds.left + playerBounds.width < wallBounds.left + wallBounds.width
 						&& playerBounds.top < wallBounds.top + wallBounds.height
@@ -197,7 +197,7 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 						entity->setPosition(wallBounds.left - playerBounds.width / 2.f, playerBounds.top + playerBounds.height / 2.f);
 					}
 
-					//Left collision
+					// 障碍物在左侧
 					else if (playerBounds.left > wallBounds.left
 						&& playerBounds.left + playerBounds.width > wallBounds.left + wallBounds.width
 						&& playerBounds.top < wallBounds.top + wallBounds.height
@@ -248,7 +248,7 @@ void Shitful::Level::readToInt(std::ifstream& in, int& val)
 	while (true)
 	{
 		in >> c;
-		if (in.eof())
+		if (!in)
 			throw std::runtime_error("File is corrupted.");
 		if (isspace(c))
 			continue;

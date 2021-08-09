@@ -132,6 +132,7 @@ float Shitful::toDegree(float radian)
 {
 	return 180.f / 3.141592653589793238462643383f * radian;
 }
+
 void Shitful::centerOrigin(sf::Sprite& sprite)
 {
 	sf::FloatRect bounds = sprite.getLocalBounds();
@@ -144,7 +145,6 @@ void Shitful::centerOrigin(sf::Text& text)
 	text.setOrigin(std::floor(bounds.left + bounds.width / 2.f), std::floor(bounds.top + bounds.height / 2.f));
 }
 
-
 void Shitful::centerOrigin(Animation& animation)
 {
 	sf::FloatRect bounds = animation.getLocalBounds();
@@ -155,6 +155,7 @@ float Shitful::length(sf::Vector2f vector)
 {
 	return std::sqrt(vector.x * vector.x + vector.y * vector.y);
 }
+
 
 sf::Vector2f Shitful::unitVector(sf::Vector2f vector)
 {

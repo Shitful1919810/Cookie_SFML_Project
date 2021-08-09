@@ -8,7 +8,7 @@
 #include "GameOverState.h"
 
 Shitful::Game::Game()
-	: mWindow(sf::VideoMode(1280, 720), "SFML Application")
+	: mWindow(sf::VideoMode(1280, 720), "SFML Application", sf::Style::Close)
 	, mTextures()
 	, mFonts()
 	, mPlayer()
@@ -137,7 +137,7 @@ void Shitful::Game::render()
 	mWindow.clear();
 	//mWorld.draw();
 	mStateStack.draw();
-	mWindow.setView(mWindow.getDefaultView());
+	//mWindow.setView(mWindow.getDefaultView());
 	//mWindow.draw(mStatisticsText);
 	mWindow.display();
 }
