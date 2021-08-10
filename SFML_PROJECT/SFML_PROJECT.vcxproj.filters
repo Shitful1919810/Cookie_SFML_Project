@@ -55,12 +55,6 @@
     <Filter Include="源文件\Map">
       <UniqueIdentifier>{e094d90b-6a22-4f85-97b5-1c274dd3cba7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Scene\Module">
-      <UniqueIdentifier>{cd690fba-2e23-4547-804d-f0a69057c5d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\Scene\Module">
-      <UniqueIdentifier>{11acf91e-8728-425d-8948-ce00a1265967}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\Audio">
       <UniqueIdentifier>{8d27b10e-b4ec-4c0d-bdc1-8f06a7c5e417}</UniqueIdentifier>
     </Filter>
@@ -154,7 +148,7 @@
       <Filter>源文件\Scene</Filter>
     </ClCompile>
     <ClCompile Include="HitboxModule.cpp">
-      <Filter>源文件\Scene\Module</Filter>
+      <Filter>源文件\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -254,14 +248,14 @@
     <ClInclude Include="NYN.h">
       <Filter>头文件\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="HitboxModule.h">
-      <Filter>头文件\Scene\Module</Filter>
-    </ClInclude>
     <ClInclude Include="VectorHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="PauseState.h">
       <Filter>头文件\State\MyState</Filter>
+    </ClInclude>
+    <ClInclude Include="HitboxModule.h">
+      <Filter>头文件\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

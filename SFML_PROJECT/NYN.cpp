@@ -15,8 +15,17 @@ Shitful::Cookie::Cookie(EntityType type, const TextureHolder& textures, const Fo
 	, mIsMarkedForRemoval(false)
 	, mAcceleration()
 	, mDeacceleration(Table[type].deceleration)
+	, mWalkingAnimation(textures.get(TextureID::PlayerWalking))
+	, mPattern(MovingPattern::Idling)
+	, mNowDisplayDrawable(&mSprite)
+	, mNowDisplayTransformable(&mSprite)
 {
+	mWalkingAnimation.setFrameSize(sf::Vector2i(120, 166));
+	mWalkingAnimation.setNumFrames(4);
+	mWalkingAnimation.setDuration(sf::seconds(1));
+	mWalkingAnimation.setRepeating(true);
 	centerOrigin(mSprite);
+	centerOrigin(mWalkingAnimation);
 	mHitbox.reset(new HitboxModule(*this));
 }
 
@@ -118,20 +127,61 @@ void Shitful::Cookie::updateCurrent(sf::Time dt, CommandQueue& commands)
 	{
 		return;
 	}
+	
 	sf::Vector2f velocity = getVelocity();
-
 	// 确保速率不超过规定限度
 	if (velocity > getMaxSpeed())
 		setVelocity(unitVector(velocity) * getMaxSpeed());
 	Entity::updateCurrent(dt, commands);
-
+	updatePattern(dt);
 }
 
 
 void Shitful::Cookie::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(mSprite, states);
+	//target.draw(mSprite, states);
+	target.draw(*mNowDisplayDrawable, states);
 #ifndef NDEBUG
 	mHitbox->drawCurrent(target, states);
 #endif // NDEBUG
+}
+
+void Shitful::Cookie::updatePattern(sf::Time dt)
+{
+	sf::Vector2f velocity = getVelocity();
+
+
+	if (velocity.x != 0.f || velocity.y != 0.f)
+	{
+		if (mPattern != MovingPattern::Walking)
+		{
+			mWalkingAnimation.restart();
+			mPattern = MovingPattern::Walking;
+			mNowDisplayDrawable = &mWalkingAnimation;
+			mNowDisplayTransformable = &mWalkingAnimation;
+		}
+	}
+	else
+	{
+		if (mPattern != MovingPattern::Idling)
+		{
+			mPattern = MovingPattern::Idling;
+			mNowDisplayDrawable = &mSprite;
+			mNowDisplayTransformable = &mSprite;
+		}
+	}
+
+	if (velocity.x > 0.f)
+		mNowDisplayTransformable->setScale(1.f, 1.f);
+	if (velocity.x < 0.f)
+		mNowDisplayTransformable->setScale(-1.f, 1.f);
+
+	switch (mPattern)
+	{
+	case MovingPattern::Idling:
+		break;
+	case MovingPattern::Walking:
+		mWalkingAnimation.update(dt);
+		break;
+	}
 }

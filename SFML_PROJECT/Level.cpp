@@ -112,6 +112,7 @@ Shitful::CommandQueue& Shitful::Level::getCommandQueue()
 void Shitful::Level::loadResources()
 {
 	mTextures.load(TextureID::Player, "Image/NYN_WALK.png");
+	mTextures.load(TextureID::PlayerWalking, "Image/walk3.png");
 	mTextures.load(TextureID::TileSet, "Image/RPGpack_sheet.png");
 }
 
@@ -151,7 +152,7 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 	int fromY = bound(position.y - 1, 0, maxGridSize.y);
 	int toX = bound(position.x + 3, 0, maxGridSize.x);
 	int toY = bound(position.y + 3, 0, maxGridSize.y);
-
+	//printf("%f\n", entity->getHitbox()->getHitboxRect().left);
 
 	for(auto& layer : mMap)
 	{
@@ -174,6 +175,9 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 						&& playerBounds.left + playerBounds.width > wallBounds.left
 						)
 					{
+#ifdef SHITFUL_PRINT_COLLISION
+						printf("Bottom Collision\n");
+#endif
 						entity->stopVelocityY();
 						entity->setPosition(playerBounds.left + playerBounds.width / 2.f, wallBounds.top - playerBounds.height / 2.f);
 					}
@@ -185,6 +189,9 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 						&& playerBounds.left + playerBounds.width > wallBounds.left
 						)
 					{
+#ifdef SHITFUL_PRINT_COLLISION
+						printf("Top Collision\n");
+#endif
 						entity->stopVelocityY();
 						entity->setPosition(playerBounds.left + playerBounds.width / 2.f, wallBounds.top + wallBounds.height + playerBounds.height / 2.f);
 					}
@@ -196,6 +203,9 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 						&& playerBounds.top + playerBounds.height > wallBounds.top
 						)
 					{
+#ifdef SHITFUL_PRINT_COLLISION
+						printf("Right Collision\n");
+#endif
 						entity->stopVelocityX();
 						entity->setPosition(wallBounds.left - playerBounds.width / 2.f, playerBounds.top + playerBounds.height / 2.f);
 					}
@@ -207,6 +217,9 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 						&& playerBounds.top + playerBounds.height > wallBounds.top
 						)
 					{
+#ifdef SHITFUL_PRINT_COLLISION
+						printf("Left Collision\n");
+#endif
 						entity->stopVelocityX();
 						entity->setPosition(wallBounds.left + wallBounds.width + playerBounds.width / 2.f, playerBounds.top + playerBounds.height / 2.f);
 					}

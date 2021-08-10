@@ -14,6 +14,7 @@ namespace Shitful
 		TitleScreen,
 		Buttons,
 		Player,
+		PlayerWalking,
 
 		TileSet
 	};
