@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include  "Animation.h"
 #include "TextNode.h"
 #include "Animation.h"
 #include "SoundPlayer.h"
@@ -16,6 +17,12 @@ namespace Shitful
 			Enemy_ID,
 			SubEnemy_ID,
 			TypeCount
+		};
+
+		enum class MovingPattern
+		{
+			Idling,
+			Walking
 		};
 
 		Cookie(EntityType type, const TextureHolder& textures, const FontHolder& fonts);
@@ -35,19 +42,20 @@ namespace Shitful
 	private:
 		virtual void updateCurrent(sf::Time dt, CommandQueue& commands);
 		virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
-
+		void updatePattern(sf::Time dt);
 
 	private:
 		EntityType mType;
 		sf::Sprite mSprite;
 		float mTravelledDistance;
-
+		MovingPattern mPattern;
 		sf::Vector2f mAcceleration;
 		float mDeacceleration;
-
-		sf::Time mFireCountdown;
+		Animation mWalkingAnimation;
 		bool mIsMarkedForRemoval;
 
+		sf::Drawable* mNowDisplayDrawable;
+		sf::Transformable* mNowDisplayTransformable;
 	};
 }
 

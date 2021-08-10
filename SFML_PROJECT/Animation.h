@@ -4,7 +4,7 @@
 
 namespace Shitful
 {
-	class Animation : public sf::Drawable, public sf::Transformable
+	class Animation : public sf::Transformable, public sf::Drawable
 	{
 	public:
 		Animation();
