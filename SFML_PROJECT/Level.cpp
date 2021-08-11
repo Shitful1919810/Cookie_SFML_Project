@@ -152,7 +152,7 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 	int fromY = bound(position.y - 1, 0, maxGridSize.y);
 	int toX = bound(position.x + 3, 0, maxGridSize.x);
 	int toY = bound(position.y + 3, 0, maxGridSize.y);
-	//printf("%f\n", entity->getHitbox()->getHitboxRect().left);
+	
 
 	for(auto& layer : mMap)
 	{
@@ -218,7 +218,8 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 						)
 					{
 #ifdef SHITFUL_PRINT_COLLISION
-						printf("Left Collision\n");
+						//printf("Left Collision\n");
+						printf("%f\n", playerBounds.left);
 #endif
 						entity->stopVelocityX();
 						entity->setPosition(wallBounds.left + wallBounds.width + playerBounds.width / 2.f, playerBounds.top + playerBounds.height / 2.f);
