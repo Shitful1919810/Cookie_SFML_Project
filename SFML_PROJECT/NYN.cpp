@@ -170,9 +170,11 @@ void Shitful::Cookie::updatePattern(sf::Time dt)
 	}
 
 	if (velocity.x > 0.f)
-		mPatternSwitcher.getTransformable().setScale(1.f, 1.f);
+		//mPatternSwitcher.getTransformable().setScale(1.f, 1.f);
+		setScale(1.f, 1.f);
 	if (velocity.x < 0.f)
-		mPatternSwitcher.getTransformable().setScale(-1.f, 1.f);
+		//mPatternSwitcher.getTransformable().setScale(-1.f, 1.f);
+		setScale(-1.f, 1.f);
 
 	switch (mPattern)
 	{

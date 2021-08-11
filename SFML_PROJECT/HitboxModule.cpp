@@ -22,7 +22,8 @@ Shitful::HitboxModule::HitboxModule(Entity& master)
 
 sf::FloatRect Shitful::HitboxModule::getHitboxRect() const
 {
-	return mMaster.getWorldTransform().transformRect(mHitbox);
+	sf::Vector2f masterPosition = mMaster.getWorldPosition();
+	return { masterPosition.x + mHitbox.left, masterPosition.y + mHitbox.top, mHitbox.width, mHitbox.height };
 }
 
 sf::Vector2f Shitful::HitboxModule::getWorldPosition() const
@@ -32,8 +33,9 @@ sf::Vector2f Shitful::HitboxModule::getWorldPosition() const
 
 sf::FloatRect Shitful::HitboxModule::getNextHitbox(sf::Time dt) const
 {
-	return mMaster.getWorldTransform().transformRect({ mHitbox.left + mMaster.getVelocity().x*dt.asSeconds(), mHitbox.top + mMaster.getVelocity().y*dt.asSeconds()
-		, mHitbox.width, mHitbox.height });
+	sf::Vector2f masterPosition = mMaster.getWorldPosition();
+	return { masterPosition.x + mHitbox.left + mMaster.getVelocity().x * dt.asSeconds(), masterPosition.y + mHitbox.top + mMaster.getVelocity().y * dt.asSeconds()
+		, mHitbox.width, mHitbox.height };
 }
 
 void Shitful::HitboxModule::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
