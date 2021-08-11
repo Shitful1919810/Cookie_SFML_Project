@@ -5,12 +5,11 @@ Shitful::HitboxModule::HitboxModule(Entity& master, sf::Vector2f size)
 	, mHitbox()
 	, mShape(size)
 {
-	mShape.setPosition(getPosition() - 0.5f * size);
+	mShape.setPosition(-0.5f * size);
 	mShape.setOutlineColor(sf::Color::Green);
 	mShape.setFillColor(sf::Color::Transparent);
 	mShape.setOutlineThickness(3.f);
-	mHitbox = sf::FloatRect(getPosition() - 0.5f * size, size);
-	setPosition(master.getPosition());
+	mHitbox = sf::FloatRect(-0.5f * size, size);
 
 }
 

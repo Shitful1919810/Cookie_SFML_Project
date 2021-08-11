@@ -6,7 +6,7 @@ namespace Shitful
 {
 	class Entity;
 
-	class HitboxModule : public sf::Transformable
+	class HitboxModule
 	{
 	public:
 		using Ptr = std::unique_ptr<HitboxModule>;
