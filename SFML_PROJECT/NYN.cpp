@@ -17,8 +17,7 @@ Shitful::Cookie::Cookie(EntityType type, const TextureHolder& textures, const Fo
 	, mDeacceleration(Table[type].deceleration)
 	, mWalkingAnimation(textures.get(TextureID::PlayerWalking))
 	, mPattern(MovingPattern::Idling)
-	, mNowDisplayDrawable(&mSprite)
-	, mNowDisplayTransformable(&mSprite)
+	, mPatternSwitcher(mSprite)
 {
 	mWalkingAnimation.setFrameSize(sf::Vector2i(120, 166));
 	mWalkingAnimation.setNumFrames(4);
@@ -140,7 +139,7 @@ void Shitful::Cookie::updateCurrent(sf::Time dt, CommandQueue& commands)
 void Shitful::Cookie::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	//target.draw(mSprite, states);
-	target.draw(*mNowDisplayDrawable, states);
+	target.draw(mPatternSwitcher.getDrawable(), states);
 #ifndef NDEBUG
 	mHitbox->drawCurrent(target, states);
 #endif // NDEBUG
@@ -157,8 +156,7 @@ void Shitful::Cookie::updatePattern(sf::Time dt)
 		{
 			mWalkingAnimation.restart();
 			mPattern = MovingPattern::Walking;
-			mNowDisplayDrawable = &mWalkingAnimation;
-			mNowDisplayTransformable = &mWalkingAnimation;
+			mPatternSwitcher.switchTo(mWalkingAnimation);
 		}
 	}
 	else
@@ -166,15 +164,15 @@ void Shitful::Cookie::updatePattern(sf::Time dt)
 		if (mPattern != MovingPattern::Idling)
 		{
 			mPattern = MovingPattern::Idling;
-			mNowDisplayDrawable = &mSprite;
-			mNowDisplayTransformable = &mSprite;
+			mPatternSwitcher.switchTo(mSprite);
+
 		}
 	}
 
 	if (velocity.x > 0.f)
-		mNowDisplayTransformable->setScale(1.f, 1.f);
+		mPatternSwitcher.getTransformable().setScale(1.f, 1.f);
 	if (velocity.x < 0.f)
-		mNowDisplayTransformable->setScale(-1.f, 1.f);
+		mPatternSwitcher.getTransformable().setScale(-1.f, 1.f);
 
 	switch (mPattern)
 	{

@@ -33,6 +33,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="MovingPatternSwitcher.cpp" />
     <ClCompile Include="MusicPlayer.cpp" />
     <ClCompile Include="NYN.cpp" />
     <ClCompile Include="PauseState.cpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="MovingPatternSwitcher.h" />
     <ClInclude Include="MusicPlayer.h" />
     <ClInclude Include="NYN.h" />
     <ClInclude Include="Particle.h" />

@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "SoundPlayer.h"
 #include "ResourceIdentifiers.h"
+#include "MovingPatternSwitcher.h"
 
 namespace Shitful
 {
@@ -19,10 +20,11 @@ namespace Shitful
 			TypeCount
 		};
 
-		enum class MovingPattern
+		enum MovingPattern
 		{
 			Idling,
-			Walking
+			Walking,
+			Type
 		};
 
 		Cookie(EntityType type, const TextureHolder& textures, const FontHolder& fonts);
@@ -54,8 +56,7 @@ namespace Shitful
 		Animation mWalkingAnimation;
 		bool mIsMarkedForRemoval;
 
-		sf::Drawable* mNowDisplayDrawable;
-		sf::Transformable* mNowDisplayTransformable;
+		PatternSwitcher mPatternSwitcher;
 	};
 }
 

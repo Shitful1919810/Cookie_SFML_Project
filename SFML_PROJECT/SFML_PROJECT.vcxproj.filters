@@ -150,6 +150,9 @@
     <ClCompile Include="HitboxModule.cpp">
       <Filter>源文件\Component</Filter>
     </ClCompile>
+    <ClCompile Include="MovingPatternSwitcher.cpp">
+      <Filter>源文件\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -255,6 +258,9 @@
       <Filter>头文件\State\MyState</Filter>
     </ClInclude>
     <ClInclude Include="HitboxModule.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingPatternSwitcher.h">
       <Filter>头文件\Component</Filter>
     </ClInclude>
   </ItemGroup>
