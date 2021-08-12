@@ -48,15 +48,15 @@ namespace Shitful
 
 	private:
 		EntityType mType;
-		sf::Sprite mSprite;
 		float mTravelledDistance;
 		MovingPattern mPattern;
 		sf::Vector2f mAcceleration;
 		float mDeacceleration;
-		Animation mWalkingAnimation;
 		bool mIsMarkedForRemoval;
 
 		PatternSwitcher mPatternSwitcher;
+		sf::Sprite mSprite;
+		Animation mWalkingAnimation;
 	};
 }
 
