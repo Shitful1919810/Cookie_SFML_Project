@@ -9,6 +9,7 @@ namespace Shitful
 	{
 	public:
 		Game();
+		Game(const Game&) = delete;
 		void run();
 	private:
 
