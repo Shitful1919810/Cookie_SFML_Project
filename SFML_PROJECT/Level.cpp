@@ -3,6 +3,7 @@
 #include <exception>
 #include "Utilities.h"
 #include "Level.h"
+#include "TileFactory.h"
 
 Shitful::Level::Level(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds)
 	: mTarget(outputTarget)
@@ -51,8 +52,8 @@ void Shitful::Level::buildLevel(const std::string& file)
 				//loadfile >> tileId;
 				if (tileId < 0 || tileId >= Tile::TypeCount)
 					throw std::runtime_error("Invalid input in " + file);
-				layer[row].emplace_back(mTextures, static_cast<Tile::Type>(tileId));
-				layer[row].back().setGridPosition({ col, row }, mGridSize);
+				layer[row].emplace_back(tileFactory(static_cast<Tile::Type>(tileId), mTextures));
+				layer[row].back()->setGridPosition({ col, row }, mGridSize);
 			}
 		}
 	}
@@ -139,7 +140,7 @@ void Shitful::Level::drawTiles()
 		{
 			for (int col = fromX; col < toX; ++col)
 			{
-				layer[row][col].draw(mTarget );
+				layer[row][col]->draw(mTarget);
 			}
 		}
 	}
@@ -162,10 +163,10 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 			{
 				assert(entity->getHitbox());
 				sf::FloatRect playerBounds = entity->getHitbox()->getHitboxRect();
-				sf::FloatRect wallBounds = layer[y][x].getGlobalBounds();
+				sf::FloatRect wallBounds = layer[y][x]->getGlobalBounds(mGridSize);
 				sf::FloatRect nextPositionBounds = entity->getHitbox()->getNextHitbox(dt);
-				if (layer[y][x].isBlocking() &&
-					layer[y][x].intersects(nextPositionBounds)
+				if (layer[y][x]->isBlocking() &&
+					layer[y][x]->intersects(nextPositionBounds,mGridSize)
 					)
 				{
 					// 障碍物在下方

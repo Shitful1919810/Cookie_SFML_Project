@@ -44,7 +44,7 @@ namespace Shitful
 		TextureHolder mTextures;
 		CommandQueue mCommandQueue;	// 存放所有收到的Command,这些Command将被分发给mSceneGraph中的每一个节点
 
-		std::vector<std::vector<std::vector<Tile>>> mMap;
+		std::vector<std::vector<std::vector<Tile::Ptr>>> mMap;
 		sf::Vector2i maxGridSize;
 		sf::IntRect mWorldBound;
 		sf::IntRect mViewBound;

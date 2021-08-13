@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="CommonTile.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="DataTables.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -47,8 +48,10 @@
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="TextNode.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileFactory.cpp" />
     <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="Void.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -57,6 +60,7 @@
     <ClInclude Include="Container.h" />
     <ClInclude Include="DataTables.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="CommonTile.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
@@ -80,6 +84,7 @@
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="TextNode.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileFactory.h" />
     <ClInclude Include="TitleState.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="PlayerMover.h" />
@@ -87,6 +92,7 @@
     <ClInclude Include="HitboxModule.h" />
     <ClInclude Include="VectorHelper.h" />
     <ClInclude Include="PauseState.h" />
+    <ClInclude Include="Void.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

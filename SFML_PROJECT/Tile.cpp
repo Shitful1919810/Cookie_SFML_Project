@@ -1,61 +1,41 @@
 #include "Tile.h"
 #include "DataTables.h"
-#include "Resources.h"
 namespace
 {
 	const std::vector<Shitful::TileData> Table = Shitful::initializeTileData();
 }
 
-Shitful::Tile::Tile(TextureHolder& textures, Type type)
-	: mType(type)
-	, mSprite(textures.get(Table[type].texture), Table[type].textureRect)
-	, mTextures(textures)
+Shitful::Tile::Tile(TextureHolder& textures)
+	: mTextures(textures)
 {
 
-}
-
-void Shitful::Tile::setTileType(Type type)
-{
-	if (Table[type].texture != Table[mType].texture)
-		mSprite.setTexture(mTextures.get(Table[type].texture));
-	mSprite.setTextureRect(Table[type].textureRect);
-	mType = type;
-}
-
-bool Shitful::Tile::isBlocking()
-{
-	switch (mType)
-	{
-	case Wall:
-	case Tree:
-		return true;
-	}
-	return false;
 }
 
 void Shitful::Tile::setGridPosition(sf::Vector2i position, int gridSize)
 {
-	mSprite.setPosition(sf::Vector2f{ static_cast<float>(position.x * gridSize), static_cast<float>(position.y * gridSize) });
+	mCoordPosition = position;
 }
 
 void Shitful::Tile::draw(sf::RenderTarget& target)
 {
-	if (mType == Void)
-		return;
-	target.draw(mSprite);
 }
 
-const sf::Vector2f& Shitful::Tile::getPosition() const
+sf::Vector2f Shitful::Tile::getPosition(int gridSize) const
 {
-	return this->mSprite.getPosition();
+	return static_cast<sf::Vector2f>(mCoordPosition) * static_cast<float>(gridSize);
 }
 
-const sf::FloatRect Shitful::Tile::getGlobalBounds() const
+sf::FloatRect Shitful::Tile::getGlobalBounds(int gridSize) const
 {
-	return this->mSprite.getGlobalBounds();
+	return { getPosition(gridSize),{static_cast<float>(gridSize),static_cast<float>(gridSize)} };
 }
 
-const bool Shitful::Tile::intersects(const sf::FloatRect bounds) const
+bool Shitful::Tile::intersects(const sf::FloatRect bounds, int gridSize) const
 {
-	return this->mSprite.getGlobalBounds().intersects(bounds);
+	return getGlobalBounds(gridSize).intersects(bounds);
+}
+
+const std::vector<Shitful::TileData>& Shitful::Tile::getDataTable()
+{
+	return Table;
 }
