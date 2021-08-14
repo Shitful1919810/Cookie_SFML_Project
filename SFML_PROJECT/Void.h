@@ -8,9 +8,6 @@ namespace Shitful
 	public:
 		using Tile::Tile;
 		virtual Type getType();
-		virtual bool isBlocking();
 
-	private:
-		sf::Sprite mSprite;
 	};
 }

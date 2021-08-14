@@ -168,6 +168,9 @@
     <ClCompile Include="CommonTile.cpp">
       <Filter>源文件\Map\Tile</Filter>
     </ClCompile>
+    <ClCompile Include="TextTile.cpp">
+      <Filter>源文件\Map\Tile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -285,6 +288,9 @@
       <Filter>头文件\Map\Tile</Filter>
     </ClInclude>
     <ClInclude Include="TileFactory.h">
+      <Filter>头文件\Map\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="TextTile.h">
       <Filter>头文件\Map\Tile</Filter>
     </ClInclude>
   </ItemGroup>

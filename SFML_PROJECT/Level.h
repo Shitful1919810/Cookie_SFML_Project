@@ -31,7 +31,9 @@ namespace Shitful
 		void loadResources();
 		void fixPlayerMovement(sf::Time dt);
 		void drawTiles();
+
 		void handleTileCollision(Entity * entity, sf::Time dt);
+		void handleTileEvents(sf::Time dt);
 		void handleBoundaryCollision(Entity* entity, sf::Time dt);
 		void updateView();
 

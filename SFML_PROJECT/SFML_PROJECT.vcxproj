@@ -47,6 +47,7 @@
     <ClCompile Include="States.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="TextNode.cpp" />
+    <ClCompile Include="TextTile.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileFactory.cpp" />
     <ClCompile Include="TitleState.cpp" />
@@ -83,6 +84,7 @@
     <ClInclude Include="StateIdentifier.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="TextNode.h" />
+    <ClInclude Include="TextTile.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileFactory.h" />
     <ClInclude Include="TitleState.h" />
