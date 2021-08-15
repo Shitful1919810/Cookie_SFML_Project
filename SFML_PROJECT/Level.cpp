@@ -113,8 +113,8 @@ Shitful::CommandQueue& Shitful::Level::getCommandQueue()
 
 void Shitful::Level::loadResources()
 {
-	mTextures.load(TextureID::Player, "Image/NYN_WALK.png");
-	mTextures.load(TextureID::PlayerWalking, "Image/walk3.png");
+	mTextures.load(TextureID::Player, "Image/nyn_idle_right.png");
+	mTextures.load(TextureID::PlayerWalking, "Image/nyn_walk_right.png");
 	mTextures.load(TextureID::TileSet, "Image/RPGpack_sheet.png");
 }
 
