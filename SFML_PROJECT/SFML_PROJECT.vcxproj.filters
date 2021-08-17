@@ -61,6 +61,12 @@
     <Filter Include="源文件\Audio">
       <UniqueIdentifier>{0ff9994d-ed39-4c1b-9583-b4c218b22943}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Map\Tile">
+      <UniqueIdentifier>{ffdc1f80-5f53-4386-b8da-17fff9ecf0ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Map\Tile">
+      <UniqueIdentifier>{9f0d08fc-c7be-4035-8631-763f61407c1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -138,9 +144,6 @@
     <ClCompile Include="SoundNode.cpp">
       <Filter>源文件\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>源文件\Map</Filter>
-    </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>源文件\Map</Filter>
     </ClCompile>
@@ -152,6 +155,21 @@
     </ClCompile>
     <ClCompile Include="MovingPatternSwitcher.cpp">
       <Filter>源文件\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>源文件\Map\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Void.cpp">
+      <Filter>源文件\Map\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="TileFactory.cpp">
+      <Filter>源文件\Map\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonTile.cpp">
+      <Filter>源文件\Map\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="TextTile.cpp">
+      <Filter>源文件\Map\Tile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +263,6 @@
     <ClInclude Include="Level.h">
       <Filter>头文件\Map</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>头文件\Map</Filter>
-    </ClInclude>
     <ClInclude Include="NYN.h">
       <Filter>头文件\Scene</Filter>
     </ClInclude>
@@ -262,6 +277,21 @@
     </ClInclude>
     <ClInclude Include="MovingPatternSwitcher.h">
       <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>头文件\Map\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Void.h">
+      <Filter>头文件\Map\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonTile.h">
+      <Filter>头文件\Map\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="TileFactory.h">
+      <Filter>头文件\Map\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="TextTile.h">
+      <Filter>头文件\Map\Tile</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

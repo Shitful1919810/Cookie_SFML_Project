@@ -3,6 +3,7 @@
 #include <exception>
 #include "Utilities.h"
 #include "Level.h"
+#include "TileFactory.h"
 
 Shitful::Level::Level(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds)
 	: mTarget(outputTarget)
@@ -51,8 +52,8 @@ void Shitful::Level::buildLevel(const std::string& file)
 				//loadfile >> tileId;
 				if (tileId < 0 || tileId >= Tile::TypeCount)
 					throw std::runtime_error("Invalid input in " + file);
-				layer[row].emplace_back(mTextures, static_cast<Tile::Type>(tileId));
-				layer[row].back().setGridPosition({ col, row }, mGridSize);
+				layer[row].emplace_back(tileFactory(static_cast<Tile::Type>(tileId), mTextures, mFonts));
+				layer[row].back()->setGridPosition({ col, row }, mGridSize);
 			}
 		}
 	}
@@ -78,10 +79,11 @@ void Shitful::Level::update(sf::Time dt)
 
 	while (!mCommandQueue.isEmpty())
 		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
-	mSceneGraph.removeWrecks();
 	mPlayerEntity->applyAcceleration(dt);
 	fixPlayerMovement(dt);
+	handleTileEvents(dt);
 	mSceneGraph.update(dt, mCommandQueue);
+	mSceneGraph.removeWrecks();
 	//printf("%f,%f\n", mPlayerEntity->getVelocity().x, mPlayerEntity->getVelocity().y);
 }
 
@@ -111,8 +113,8 @@ Shitful::CommandQueue& Shitful::Level::getCommandQueue()
 
 void Shitful::Level::loadResources()
 {
-	mTextures.load(TextureID::Player, "Image/NYN_WALK.png");
-	mTextures.load(TextureID::PlayerWalking, "Image/walk3.png");
+	mTextures.load(TextureID::Player, "Image/nyn_idle_right.png");
+	mTextures.load(TextureID::PlayerWalking, "Image/nyn_walk_right.png");
 	mTextures.load(TextureID::TileSet, "Image/RPGpack_sheet.png");
 }
 
@@ -139,7 +141,7 @@ void Shitful::Level::drawTiles()
 		{
 			for (int col = fromX; col < toX; ++col)
 			{
-				layer[row][col].draw(mTarget );
+				layer[row][col]->draw(mTarget);
 			}
 		}
 	}
@@ -162,10 +164,10 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 			{
 				assert(entity->getHitbox());
 				sf::FloatRect playerBounds = entity->getHitbox()->getHitboxRect();
-				sf::FloatRect wallBounds = layer[y][x].getGlobalBounds();
+				sf::FloatRect wallBounds = layer[y][x]->getGlobalBounds(mGridSize);
 				sf::FloatRect nextPositionBounds = entity->getHitbox()->getNextHitbox(dt);
-				if (layer[y][x].isBlocking() &&
-					layer[y][x].intersects(nextPositionBounds)
+				if (layer[y][x]->isBlocking() &&
+					layer[y][x]->intersects(nextPositionBounds,mGridSize)
 					)
 				{
 					// 障碍物在下方
@@ -224,6 +226,36 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 						entity->stopVelocityX();
 						entity->setPosition(wallBounds.left + wallBounds.width + playerBounds.width / 2.f, playerBounds.top + playerBounds.height / 2.f);
 					}
+				}
+			}
+		}
+	}
+}
+
+void Shitful::Level::handleTileEvents(sf::Time dt)
+{
+	sf::Vector2i position = mPlayerEntity->getGridCoord(mGridSize);
+	int fromX = bound(position.x - 1, 0, maxGridSize.x);
+	int fromY = bound(position.y - 1, 0, maxGridSize.y);
+	int toX = bound(position.x + 3, 0, maxGridSize.x);
+	int toY = bound(position.y + 3, 0, maxGridSize.y);
+	sf::FloatRect playerBounds = mPlayerEntity->getHitbox()->getHitboxRect();
+
+	for (auto& layer : mMap)
+	{
+		for (int x = fromX; x < toX; x++)
+		{
+			for (int y = fromY; y < toY; y++)
+			{
+				if (layer[y][x]->touchTrigger() &&
+					layer[y][x]->intersects(playerBounds, mGridSize)
+					)
+				{
+					layer[y][x]->onActive(mCommandQueue);
+				}
+				else
+				{
+					layer[y][x]->onDeactive(mCommandQueue);
 				}
 			}
 		}

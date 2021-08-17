@@ -12,12 +12,16 @@ namespace Shitful
 		enum Type
 		{
 			None = 0,
-			Scene = 1 << 0,
-			Player = 1 << 1,
-			Allied = 1 << 2,
-			Enemy = 1 << 3,
-			ParticleSystem = 1 << 4,
-			SoundEffect = 1 << 5,
+			World = 1 << 0,
+			Scene = 1 << 1,
+			Player = 1 << 2,
+			Allied = 1 << 3,
+			Enemy = 1 << 4,
+
+			ParticleSystem = 1 << 5,
+			SoundEffect = 1 << 6,
+
+			TestText = 1 << 7,
 
 			Alive = Player | Allied | Enemy,
 		};

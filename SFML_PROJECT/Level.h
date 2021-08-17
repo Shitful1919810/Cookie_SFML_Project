@@ -31,7 +31,9 @@ namespace Shitful
 		void loadResources();
 		void fixPlayerMovement(sf::Time dt);
 		void drawTiles();
+
 		void handleTileCollision(Entity * entity, sf::Time dt);
+		void handleTileEvents(sf::Time dt);
 		void handleBoundaryCollision(Entity* entity, sf::Time dt);
 		void updateView();
 
@@ -44,7 +46,7 @@ namespace Shitful
 		TextureHolder mTextures;
 		CommandQueue mCommandQueue;	// 存放所有收到的Command,这些Command将被分发给mSceneGraph中的每一个节点
 
-		std::vector<std::vector<std::vector<Tile>>> mMap;
+		std::vector<std::vector<std::vector<Tile::Ptr>>> mMap;
 		sf::Vector2i maxGridSize;
 		sf::IntRect mWorldBound;
 		sf::IntRect mViewBound;
