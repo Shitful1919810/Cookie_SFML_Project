@@ -12,5 +12,7 @@ Shitful::Tile::Ptr Shitful::tileFactory(Tile::Type type, TextureHolder& textures
 		return std::make_unique<CommonTile>(textures, type);
 	case Tile::TestText:
 		return std::make_unique<TextTile>(textures, fonts, "TestTextTile");
+	default:
+		throw std::runtime_error("Error tile type");
 	}
 }
