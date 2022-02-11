@@ -20,7 +20,8 @@ Shitful::Game::Game()
 	, mStateStack(State::Context(mWindow, mTextures, mFonts, mPlayer, mMusic, mSounds))
 	//, mWorld(mWindow)
 {
-	mFonts.load(FontID::Main, "kenvector_future.ttf");
+	// mFonts.load(FontID::Main, "kenvector_future.ttf");
+	mFonts.load(FontID::Main, "Sansation.ttf");
 	
 	mTextures.load(TextureID::TitleScreen, "Image/NYN_BG.png");
 	mTextures.load(TextureID::Buttons, "Image/greenSheet.png");
