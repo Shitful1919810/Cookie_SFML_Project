@@ -25,7 +25,7 @@ Shitful::Cookie::Cookie(EntityType type, const TextureHolder& textures, const Fo
 	mWalkingAnimation.setRepeating(true);
 	centerOrigin(mSprite);
 	centerOrigin(mWalkingAnimation);
-	mHitbox.reset(new HitboxModule(*this));
+	mHitbox = std::make_unique<HitboxModule>(*this);
 }
 
 Shitful::Receiver Shitful::Cookie::getCategory() const

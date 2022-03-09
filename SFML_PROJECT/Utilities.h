@@ -24,7 +24,16 @@ namespace Shitful
 	int randomInt(int exclusiveMax);
 
 	template<typename T>
-	// if lower<=x<=upper return x ,else return lower or upper
+	//			^  ret
+	// upper	|               /------------- 
+	//			|              /
+	//			|             /
+	//			|            /
+	//			|           /
+	// lower	|  --------/
+	//			|
+	//			|
+	//			_______________________________>  x
 	T bound(T x, T lower, T upper)
 	{
 		if (x < lower)

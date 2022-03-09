@@ -5,6 +5,7 @@ namespace
 	const std::vector<Shitful::TileData> Table = Shitful::initializeTileData();
 }
 
+
 Shitful::Tile::Tile(TextureHolder& textures)
 	: mTextures(textures)
 {
