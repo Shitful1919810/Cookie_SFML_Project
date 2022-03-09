@@ -65,7 +65,7 @@ void Shitful::GUI::Container::select(std::size_t index)
         if (hasSelection())
             mChildren[mSelectedChild]->deselect();
         mChildren[index]->select();
-        mSelectedChild = index;
+        mSelectedChild = static_cast<int>(index);
     }
 }
 

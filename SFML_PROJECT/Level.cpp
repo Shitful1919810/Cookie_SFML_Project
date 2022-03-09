@@ -63,7 +63,7 @@ void Shitful::Level::buildLevel(const std::string& file)
 
 	std::unique_ptr<Cookie> player(new Cookie(Cookie::Player_ID, mTextures, mFonts));
 	mPlayerEntity = player.get();
-	mPlayerEntity->setPosition(mGridSize * 5, mGridSize * 20);
+	mPlayerEntity->setPosition(static_cast<float>(mGridSize * 5), static_cast<float>(mGridSize * 20));
 	mSceneGraph.attachChild(std::move(player));
 	loadfile.close();
 }

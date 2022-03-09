@@ -33,7 +33,7 @@ namespace Shitful
 
         private:
             std::vector<Component::Ptr>		mChildren;
-            int								mSelectedChild;
+            int     						mSelectedChild;
         };
 
     }
