@@ -35,6 +35,7 @@ namespace Shitful
 		void handleTileCollision(Entity * entity, sf::Time dt);
 		void handleTileEvents(sf::Time dt);
 		void handleBoundaryCollision(Entity* entity, sf::Time dt);
+		void handleEntityCollision();
 		void updateView();
 
 		void readToInt(std::ifstream& in, int& val);

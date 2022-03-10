@@ -2,6 +2,7 @@
 #include "DataTables.h"
 #include "Utilities.h"
 #include "VectorHelper.h"
+#include <iostream>
 
 namespace
 {
@@ -68,7 +69,14 @@ float Shitful::Cookie::getMaxAcceleration() const
 
 sf::FloatRect Shitful::Cookie::getBoundingRect() const
 {
-	return mSprite.getGlobalBounds();
+	return mHitbox->getHitboxRect();
+
+	//std::cout << mType << ':' << mSprite.getGlobalBounds().left << ',' << mSprite.getGlobalBounds().top << std::endl;
+}
+
+sf::FloatRect Shitful::Cookie::getDisplayBound()
+{
+	return mSprite.getLocalBounds();
 }
 
 void Shitful::Cookie::setAcceleration(sf::Vector2f acceleration)

@@ -87,9 +87,6 @@
     <ClCompile Include="GUI.cpp">
       <Filter>源文件\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>源文件\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>源文件\Scene</Filter>
     </ClCompile>
@@ -170,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="TextTile.cpp">
       <Filter>源文件\Map\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>源文件\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

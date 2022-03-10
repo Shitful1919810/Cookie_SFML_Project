@@ -4,6 +4,34 @@
 #include "Utilities.h"
 #include "Level.h"
 #include "TileFactory.h"
+#include <iostream>
+#ifndef NDEBUG
+#define SHITFUL_PRINT_COLLISION
+#endif
+namespace Shitful
+{
+	bool matchesCategories(SceneNode::Pair& colliders, Category::Type type1, Category::Type type2)
+	{
+		unsigned int category1 = colliders.first->getCategory();
+		unsigned int category2 = colliders.second->getCategory();
+
+		// Make sure first pair entry has category type1 and second has type2
+		if (type1 & category1 && type2 & category2)
+		{
+			return true;
+		}
+		else if (type1 & category2 && type2 & category1)
+		{
+			std::swap(colliders.first, colliders.second);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+
 
 Shitful::Level::Level(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds)
 	: mTarget(outputTarget)
@@ -65,6 +93,11 @@ void Shitful::Level::buildLevel(const std::string& file)
 	mPlayerEntity = player.get();
 	mPlayerEntity->setPosition(static_cast<float>(mGridSize * 5), static_cast<float>(mGridSize * 20));
 	mSceneGraph.attachChild(std::move(player));
+
+	std::unique_ptr<Cookie> test(std::make_unique<Cookie>(Cookie::SubEnemy_ID, mTextures, mFonts));
+	test->setPosition({ 100.f,100.f });
+	mSceneGraph.attachChild(std::move(test));
+
 	loadfile.close();
 }
 
@@ -81,9 +114,10 @@ void Shitful::Level::update(sf::Time dt)
 		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
 	mPlayerEntity->applyAcceleration(dt);
 	fixPlayerMovement(dt);
-	handleTileEvents(dt);
+	handleEntityCollision();
+	handleTileEvents(dt);	mSceneGraph.removeWrecks();
 	mSceneGraph.update(dt, mCommandQueue);
-	mSceneGraph.removeWrecks();
+
 	//printf("%f,%f\n", mPlayerEntity->getVelocity().x, mPlayerEntity->getVelocity().y);
 }
 
@@ -163,7 +197,7 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 			for (int y = fromY; y < toY; y++)
 			{
 				assert(entity->getHitbox());
-				sf::FloatRect playerBounds = entity->getHitbox()->getHitboxRect();
+				sf::FloatRect playerBounds = entity->getBoundingRect();
 				sf::FloatRect wallBounds = layer[y][x]->getGlobalBounds(mGridSize);
 				sf::FloatRect nextPositionBounds = entity->getHitbox()->getNextHitbox(dt);
 				if (layer[y][x]->isBlocking() &&
@@ -290,6 +324,21 @@ void Shitful::Level::handleBoundaryCollision(Entity* entity, sf::Time dt)
 
 }
 
+void Shitful::Level::handleEntityCollision()
+{
+	std::set<SceneNode::Pair> collisionPairs;
+	mSceneGraph.checkSceneCollision(mSceneGraph, collisionPairs);
+	for (SceneNode::Pair pir : collisionPairs)
+	{
+		if (matchesCategories(pir, Category::Player, Category::Enemy))
+		{
+#ifdef SHITFUL_PRINT_COLLISION
+			std::cout << "Collision" << std::endl;
+#endif
+		}
+	}
+}
+
 void Shitful::Level::updateView()
 {
 	sf::Vector2f playerPosition = mPlayerEntity->getPosition();
@@ -326,8 +375,6 @@ void Shitful::Level::readToInt(std::ifstream& in, int& val)
 		in.unget();
 		in >> val;
 		break;
-
-
 
 	}
 }

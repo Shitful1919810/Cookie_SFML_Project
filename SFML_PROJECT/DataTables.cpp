@@ -16,6 +16,13 @@ std::vector<Shitful::EntityData> Shitful::initializeAircraftData()
 	data[Cookie::EntityType::Player_ID].deceleration = 3000.f;
 	data[Cookie::EntityType::Player_ID].texture = TextureID::Player;
 	data[Cookie::EntityType::Player_ID].textureRect = sf::IntRect(0, 0, 1024 / 16, 128 / 2);
+
+	data[Cookie::EntityType::SubEnemy_ID].hitpoints = 100;
+	data[Cookie::EntityType::SubEnemy_ID].speed = 600.f;
+	data[Cookie::EntityType::SubEnemy_ID].acceleration = 6000.f;
+	data[Cookie::EntityType::SubEnemy_ID].deceleration = 3000.f;
+	data[Cookie::EntityType::SubEnemy_ID].texture = TextureID::Player;
+	data[Cookie::EntityType::SubEnemy_ID].textureRect = sf::IntRect(0, 0, 1024 / 16, 128 / 2);
 	return data;
 }
 

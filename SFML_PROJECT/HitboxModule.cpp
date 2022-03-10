@@ -15,7 +15,7 @@ Shitful::HitboxModule::HitboxModule(Entity& master, sf::Vector2f size)
 
 Shitful::HitboxModule::HitboxModule(Entity& master)
 	: HitboxModule(master
-		, { master.getBoundingRect().width / 2.f,master.getBoundingRect().height / 2.f })
+		, { master.getDisplayBound().width / 2.f,master.getDisplayBound().height / 2.f})
 {
 }
 

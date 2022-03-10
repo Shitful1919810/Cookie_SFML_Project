@@ -30,6 +30,10 @@ void Shitful::Entity::remove()
 {
 	destroy();
 }
+sf::FloatRect Shitful::Entity::getDisplayBound()
+{
+	return sf::FloatRect();
+}
 void Shitful::Entity::setVelocity(sf::Vector2f velocity)
 {
 	mVelocity = velocity;

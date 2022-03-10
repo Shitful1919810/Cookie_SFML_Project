@@ -35,12 +35,15 @@ namespace Shitful
 		float getMaxSpeed() const;
 		sf::Vector2f getAcceleration() const;
 		float getMaxAcceleration() const;
+		sf::FloatRect getDisplayBound();
 		virtual sf::FloatRect getBoundingRect() const;
 		void setAcceleration(sf::Vector2f acceleration);
 		void setDeacceleration(float deacceleration);
 		void playLocalSound(CommandQueue& commands, SoundEffectID effect);
 
 		void applyAcceleration(sf::Time dt);
+
+		friend class HitboxModule;
 	private:
 		virtual void updateCurrent(sf::Time dt, CommandQueue& commands);
 		virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;

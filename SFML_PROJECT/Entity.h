@@ -17,6 +17,7 @@ namespace Shitful
 		int getHitpoints() const;
 		virtual bool isDestroyed() const;
 		virtual void remove();
+		virtual sf::FloatRect getDisplayBound();
 
 		void setVelocity(sf::Vector2f velocity);
 		void setVelocity(float vx, float vy);
