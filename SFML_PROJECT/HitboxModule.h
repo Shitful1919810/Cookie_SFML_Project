@@ -10,7 +10,7 @@ namespace Shitful
 	{
 	public:
 		using Ptr = std::unique_ptr<HitboxModule>;
-		HitboxModule(Entity& master, sf::Vector2f size);
+		HitboxModule(Entity& master, sf::Vector2f size, sf::Vector2f offset);
 		HitboxModule(Entity& master);
 		sf::FloatRect getHitboxRect() const;
 		sf::Vector2f getWorldPosition() const;

@@ -112,10 +112,13 @@ void Shitful::Level::update(sf::Time dt)
 
 	while (!mCommandQueue.isEmpty())
 		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
+
 	mPlayerEntity->applyAcceleration(dt);
 	fixPlayerMovement(dt);
+
 	handleEntityCollision();
-	handleTileEvents(dt);	mSceneGraph.removeWrecks();
+	handleTileEvents(dt);
+	mSceneGraph.removeWrecks();
 	mSceneGraph.update(dt, mCommandQueue);
 
 	//printf("%f,%f\n", mPlayerEntity->getVelocity().x, mPlayerEntity->getVelocity().y);
@@ -181,27 +184,30 @@ void Shitful::Level::drawTiles()
 	}
 }
 
-void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
+void Shitful::Level::handleTileCollision(Entity* entity, sf::Time dt)
 {
 	sf::Vector2i position = entity->getGridCoord(mGridSize);
-	int fromX = bound(position.x - 1, 0, maxGridSize.x);
-	int fromY = bound(position.y - 1, 0, maxGridSize.y);
+	int fromX = bound(position.x - 2, 0, maxGridSize.x);
+	int fromY = bound(position.y - 2, 0, maxGridSize.y);
 	int toX = bound(position.x + 3, 0, maxGridSize.x);
 	int toY = bound(position.y + 3, 0, maxGridSize.y);
-	
+	assert(entity->getHitbox());
 
-	for(auto& layer : mMap)
+	for (auto& layer : mMap)
 	{
 		for (int x = fromX; x < toX; x++)
 		{
 			for (int y = fromY; y < toY; y++)
 			{
-				assert(entity->getHitbox());
-				sf::FloatRect playerBounds = entity->getBoundingRect();
+
+
 				sf::FloatRect wallBounds = layer[y][x]->getGlobalBounds(mGridSize);
+				sf::Vector2f entityPosition = entity->getPosition();
+				sf::FloatRect playerBounds = entity->getBoundingRect();
 				sf::FloatRect nextPositionBounds = entity->getHitbox()->getNextHitbox(dt);
+
 				if (layer[y][x]->isBlocking() &&
-					layer[y][x]->intersects(nextPositionBounds,mGridSize)
+					layer[y][x]->intersects(nextPositionBounds, mGridSize)
 					)
 				{
 					// 障碍物在下方
@@ -213,9 +219,10 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 					{
 #ifdef SHITFUL_PRINT_COLLISION
 						printf("Bottom Collision\n");
+						printf("%f %f\n", playerBounds.left, playerBounds.top);
 #endif
 						entity->stopVelocityY();
-						entity->setPosition(playerBounds.left + playerBounds.width / 2.f, wallBounds.top - playerBounds.height / 2.f);
+						entity->setPosition(entityPosition.x, wallBounds.top - playerBounds.height + entityPosition.y - playerBounds.top - eps);
 					}
 
 					// 障碍物在上方
@@ -227,9 +234,10 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 					{
 #ifdef SHITFUL_PRINT_COLLISION
 						printf("Top Collision\n");
+						printf("%f %f\n", playerBounds.left, playerBounds.top);
 #endif
 						entity->stopVelocityY();
-						entity->setPosition(playerBounds.left + playerBounds.width / 2.f, wallBounds.top + wallBounds.height + playerBounds.height / 2.f);
+						entity->setPosition(entityPosition.x, wallBounds.top + wallBounds.height + entityPosition.y - playerBounds.top + eps);
 					}
 
 					// 障碍物在右侧
@@ -241,9 +249,10 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 					{
 #ifdef SHITFUL_PRINT_COLLISION
 						printf("Right Collision\n");
+						printf("%f %f\n", playerBounds.left, playerBounds.top);
 #endif
 						entity->stopVelocityX();
-						entity->setPosition(wallBounds.left - playerBounds.width / 2.f, playerBounds.top + playerBounds.height / 2.f);
+						entity->setPosition(wallBounds.left - playerBounds.width - playerBounds.left + entityPosition.x - eps, entityPosition.y);
 					}
 
 					// 障碍物在左侧
@@ -254,11 +263,11 @@ void Shitful::Level::handleTileCollision(Entity * entity, sf::Time dt)
 						)
 					{
 #ifdef SHITFUL_PRINT_COLLISION
-						//printf("Left Collision\n");
-						printf("%f\n", playerBounds.left);
+						printf("Left Collision\n");
+						printf("%f %f\n", playerBounds.left, playerBounds.top);
 #endif
 						entity->stopVelocityX();
-						entity->setPosition(wallBounds.left + wallBounds.width + playerBounds.width / 2.f, playerBounds.top + playerBounds.height / 2.f);
+						entity->setPosition(wallBounds.left + wallBounds.width + entityPosition.x - playerBounds.left + eps, entityPosition.y);
 					}
 				}
 			}
@@ -301,25 +310,26 @@ void Shitful::Level::handleBoundaryCollision(Entity* entity, sf::Time dt)
 	sf::FloatRect playerBounds = entity->getHitbox()->getHitboxRect();
 	sf::FloatRect nextPositionBounds = entity->getHitbox()->getNextHitbox(dt);
 	sf::FloatRect realWorldBound(mWorldBound.left * mGridSize,mWorldBound.top * mGridSize,mWorldBound.width * mGridSize,mWorldBound.height * mGridSize);
+	sf::Vector2f entityPosition = entity->getPosition();
 	if (nextPositionBounds.top < realWorldBound.top)
 	{
 		entity->stopVelocityY();
-		entity->setPosition(playerBounds.left + playerBounds.width / 2.f, realWorldBound.top + playerBounds.height / 2.f);
+		entity->setPosition(entityPosition.x, realWorldBound.top + entityPosition.y - playerBounds.top);
 	}
 	if (nextPositionBounds.top + nextPositionBounds.height > realWorldBound.top + realWorldBound.height)
 	{
 		entity->stopVelocityY();
-		entity->setPosition(playerBounds.left + playerBounds.width / 2.f, realWorldBound.top + realWorldBound.height - playerBounds.height / 2.f);
+		entity->setPosition(entityPosition.x, realWorldBound.top + realWorldBound.height - playerBounds.height + entityPosition.y - playerBounds.top);
 	}
 	if (nextPositionBounds.left < realWorldBound.left)
 	{
 		entity->stopVelocityX();
-		entity->setPosition(realWorldBound.left + playerBounds.width / 2.f, playerBounds.top + playerBounds.height / 2.f);
+		entity->setPosition(realWorldBound.left + entityPosition.x - playerBounds.left, entityPosition.y);
 	}
 	if (nextPositionBounds.left + nextPositionBounds.width > realWorldBound.left + realWorldBound.width)
 	{
 		entity->stopVelocityX();
-		entity->setPosition(realWorldBound.left + realWorldBound.width - playerBounds.width / 2.f, playerBounds.top + playerBounds.height / 2.f);
+		entity->setPosition(realWorldBound.left + realWorldBound.width - playerBounds.width - playerBounds.left + entityPosition.x, entityPosition.y);
 	}
 
 }

@@ -1,21 +1,20 @@
 #include "HitboxModule.h"
 #include "Entity.h"
-Shitful::HitboxModule::HitboxModule(Entity& master, sf::Vector2f size) 
+Shitful::HitboxModule::HitboxModule(Entity& master, sf::Vector2f size, sf::Vector2f offset = {})
 	: mMaster(master)
 	, mHitbox()
 	, mShape(size)
-{
-	mShape.setPosition(-0.5f * size);
+{	
+	mHitbox = sf::FloatRect(-0.5f * size + offset, size);
+	mShape.setPosition(mHitbox.left, mHitbox.top);
 	mShape.setOutlineColor(sf::Color::Green);
 	mShape.setFillColor(sf::Color::Transparent);
 	mShape.setOutlineThickness(3.f);
-	mHitbox = sf::FloatRect(-0.5f * size, size);
-
 }
 
 Shitful::HitboxModule::HitboxModule(Entity& master)
 	: HitboxModule(master
-		, { master.getDisplayBound().width / 2.f,master.getDisplayBound().height / 2.f})
+		, { master.getDisplayBound().width / 2.f, master.getDisplayBound().height / 2.f }, {0.f, master.getDisplayBound().height / 4.f})	// 碰撞箱的边长默认为mShape一半，位于底部中央
 {
 }
 

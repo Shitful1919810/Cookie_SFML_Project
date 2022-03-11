@@ -6,6 +6,7 @@
 namespace Shitful
 {
 	constexpr float sqrt2 = 1.4142135623731f;
+	constexpr float eps = 1e-4f;
 	// 将按键名称转化为字符串用于显示
 	std::string toString(sf::Keyboard::Key key);
 	float toRadian(float degree);
