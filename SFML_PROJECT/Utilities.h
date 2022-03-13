@@ -5,19 +5,21 @@
 
 namespace Shitful
 {
-	constexpr float sqrt2 = 1.4142135623731f;
-	constexpr float eps = 1e-4f;
+	constexpr float sqrt2 = 1.4142135623f;
+	constexpr float eps = 6e-4f;
 	// 将按键名称转化为字符串用于显示
 	std::string toString(sf::Keyboard::Key key);
 	float toRadian(float degree);
 	float toDegree(float radian);
 
+
+	template<typename T>
 	// 将本地坐标原点设置到图象中心
-	void centerOrigin(sf::Sprite& sprite);
-	// 将本地坐标原点设置到图象中心
-	void centerOrigin(Animation& animation);
-	// 将本地坐标原点设置到图象中心
-	void centerOrigin(sf::Text& text);
+	void centerOrigin(T& element)
+	{
+		sf::FloatRect bounds = element.getLocalBounds();
+		element.setOrigin(std::floor(bounds.left + bounds.width / 2.f), std::floor(bounds.top + bounds.height / 2.f));
+	}
 
 	float length(sf::Vector2f vector);
 	// 获得单位方向向量

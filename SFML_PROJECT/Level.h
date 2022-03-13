@@ -56,5 +56,8 @@ namespace Shitful
 
 		Cookie* mPlayerEntity;
 		const int mGridSize;
+
+	private:
+		void adaptPlayerPosition(Entity* entity, Tile* tile, sf::Time dt);
 	};
 }
